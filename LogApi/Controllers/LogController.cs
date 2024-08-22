@@ -1,4 +1,5 @@
 ﻿using LogApi.Models;
+using LogApi.Models.ViewModels;
 using LogApi.Repositories.IRepositories;
 using Microsoft.AspNetCore.Mvc;
 
@@ -42,10 +43,11 @@ namespace LogApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] Log log)
+        public IActionResult Create([FromBody] LogViewModel logViewModel)
         {
             try
             {
+                var log = new Log(logViewModel.ProcessName, logViewModel.Message, logViewModel.Details);
                 _logRepository.Create(log);
                 return Ok();
             }
@@ -56,10 +58,11 @@ namespace LogApi.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(string id, [FromBody] Log log)
+        public IActionResult Update(string id, [FromBody] LogViewModel logViewModel)
         {
             try
             {
+                var log = new Log(logViewModel.ProcessName, logViewModel.Message, logViewModel.Details);
                 _logRepository.Update(id, log);
                 return Ok();
             }

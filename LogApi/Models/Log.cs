@@ -5,12 +5,12 @@ namespace LogApi.Models
 {
     public class Log
     {
-        public Log()
+        public Log(string processName, string message, string details)
         {
-            ProcessName = string.Empty;
-            Timestamp = new DateTime();
-            Message = string.Empty;
-            Details = string.Empty;
+            ProcessName = processName;
+            Timestamp = DateTime.Now;
+            Message = message;
+            Details = details;
         }
 
         [BsonId]
